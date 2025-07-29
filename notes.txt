@@ -1,0 +1,15 @@
+postgresql@14 started dymasius ~/Library/LaunchAgents/homebrew.mxcl.postgresql@14.plist
+
+(venv) (base) dymasius@Dymasiuss-MacBook-Air factory_motor_monitoring % brew services start postgresql
+==> Successfully started  (label: homebrew.mxcl.postgresql@14)
+
+PostgreSQL Admin Setup:
+- Admin Username: postgres
+- Admin Password: password
+- Role Permissions: SUPERUSER
+- Created manually via:
+  CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'password';
+psql -U postgres -h localhost -W
+psql -U postgres -d motor_monitoring -f 01_create_tables.sql
+SELECT * FROM motor_alerts LIMIT 5
+brew services restart postgresql

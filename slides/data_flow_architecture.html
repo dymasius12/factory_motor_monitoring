@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Flow & Architecture</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #1a365d;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+        padding: 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .content {
+        display: flex;
+        gap: 40px;
+        flex: 1;
+      }
+      .left-column {
+        flex: 1;
+      }
+      .right-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .footer {
+        position: absolute;
+        bottom: 20px;
+        right: 40px;
+        font-size: 16px;
+        color: #e2e8f0;
+      }
+      .highlight {
+        color: #3182ce;
+        font-weight: bold;
+      }
+      .flow-step {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .flow-title {
+        font-weight: bold;
+        color: #3182ce;
+        margin-bottom: 5px;
+      }
+      .arrow-icon {
+        color: #3182ce;
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="title">Data Flow & Architecture</div>
+      
+      <div class="content">
+        <div class="left-column">
+          <h2 class="text-2xl mb-3">System Architecture</h2>
+          
+          <div class="mb-4">
+            <p>The system uses a <span class="highlight">microservices architecture</span> with message queues for asynchronous communication between components.</p>
+          </div>
+          
+          <div class="mb-4">
+            <p class="mb-2"><span class="highlight">Data Flow:</span></p>
+            <div class="flow-step">
+              <div class="flow-title">1. Data Collection</div>
+              <p>Motor sensors <i class="fas fa-arrow-right arrow-icon"></i> HTTP POST to Node.js API</p>
+            </div>
+            <div class="flow-step">
+              <div class="flow-title">2. Alert Detection</div>
+              <p>Node.js validates data and checks thresholds <i class="fas fa-arrow-right arrow-icon"></i> Publishes alerts to RabbitMQ</p>
+            </div>
+            <div class="flow-step">
+              <div class="flow-title">3. Alert Processing</div>
+              <p>Python service consumes alerts <i class="fas fa-arrow-right arrow-icon"></i> Stores in PostgreSQL <i class="fas fa-arrow-right arrow-icon"></i> Publishes notifications</p>
+            </div>
+            <div class="flow-step">
+              <div class="flow-title">4. Visualization</div>
+              <p>React dashboard subscribes to notifications <i class="fas fa-arrow-right arrow-icon"></i> Displays real-time alerts and charts</p>
+            </div>
+          </div>
+          
+          <div>
+            <p class="mb-2"><span class="highlight">Key Integration Points:</span></p>
+            <ul class="space-y-1">
+              <li><i class="fas fa-exchange-alt mr-2 text-blue-400"></i> HTTP API for sensor data ingestion</li>
+              <li><i class="fas fa-exchange-alt mr-2 text-blue-400"></i> RabbitMQ exchanges for message passing</li>
+              <li><i class="fas fa-exchange-alt mr-2 text-blue-400"></i> PostgreSQL for persistent storage</li>
+              <li><i class="fas fa-exchange-alt mr-2 text-blue-400"></i> WebSocket/polling for dashboard updates</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="right-column">
+          <img src="/home/ubuntu/slides/motor_system.jpeg" alt="Motor System Architecture" style="width: 480px; height: 360px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+          
+          <div style="width: 480px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px;">
+            <p class="text-center mb-2"><span class="highlight">Architecture Benefits:</span></p>
+            <div class="grid grid-cols-2 gap-2">
+              <div><i class="fas fa-check-circle mr-1 text-blue-400"></i> Scalability</div>
+              <div><i class="fas fa-check-circle mr-1 text-blue-400"></i> Fault Tolerance</div>
+              <div><i class="fas fa-check-circle mr-1 text-blue-400"></i> Loose Coupling</div>
+              <div><i class="fas fa-check-circle mr-1 text-blue-400"></i> Real-time Updates</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">2</div>
+    </div>
+  </body>
+</html>
+
